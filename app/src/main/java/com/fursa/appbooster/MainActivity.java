@@ -75,6 +75,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mRecycler.setAdapter(mAdapter);
+    }
+
     private void hideProgressBar() {
         parent.setVisibility(View.INVISIBLE);
     }

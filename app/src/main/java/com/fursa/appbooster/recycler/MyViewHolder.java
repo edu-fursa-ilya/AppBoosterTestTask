@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fursa.appbooster.MyApp;
+import com.fursa.appbooster.app.MyApp;
 import com.fursa.appbooster.R;
 
 /**

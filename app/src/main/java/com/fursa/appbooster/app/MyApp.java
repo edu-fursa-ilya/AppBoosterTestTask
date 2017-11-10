@@ -1,4 +1,4 @@
-package com.fursa.appbooster;
+package com.fursa.appbooster.app;
 
 import android.app.Application;
 import android.content.Context;

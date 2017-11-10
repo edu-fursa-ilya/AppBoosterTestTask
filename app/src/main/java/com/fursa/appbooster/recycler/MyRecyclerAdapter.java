@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fursa.appbooster.MyApp;
+import com.fursa.appbooster.app.MyApp;
 import com.fursa.appbooster.R;
 import com.fursa.appbooster.model.TaskModel;
 import com.squareup.picasso.Picasso;
