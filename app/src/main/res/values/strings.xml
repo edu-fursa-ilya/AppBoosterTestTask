@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AppBoosterTestTask</string>
+    <string name="another_info_label">Another information</string>
 </resources>

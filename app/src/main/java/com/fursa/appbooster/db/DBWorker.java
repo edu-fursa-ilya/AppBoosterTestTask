@@ -9,6 +9,8 @@ import android.util.Log;
 import com.fursa.appbooster.model.TaskModel;
 
 /**
+ * This class helps to perform operations
+ * with SQLite Database
  * Created by Fursa Ilya on 10.11.17.
  */
 
@@ -18,6 +20,7 @@ public class DBWorker {
     private SQLiteDatabase db;
     private Cursor cursor;
     private long result;
+    private TaskModel model;
 
     public DBWorker(Context context) {
         helper = new DBHelper(context);
@@ -38,8 +41,30 @@ public class DBWorker {
         Log.d(TAG, String.valueOf(result));
     }
 
-    public int getRowsSize() {
+    public int getTableSize() {
         cursor = db.query(Column.DB_TABLE, null, null, null, null, null, null);
         return cursor.getCount();
+    }
+
+    public TaskModel getTaskByTitle(String title) {
+
+        cursor = db.rawQuery("SELECT * FROM " + Column.DB_TABLE + " WHERE " + Column.TITLE_COL + "='" + title + "';", null);
+        Log.d(TAG, String.valueOf(cursor.getCount()));
+        if(cursor.moveToFirst()) {
+            do {
+                model = new TaskModel(
+                        cursor.getInt(cursor.getColumnIndex(Column.ID_COL)),
+                        cursor.getString(cursor.getColumnIndex(Column.TITLE_COL)),
+                        cursor.getString(cursor.getColumnIndex(Column.DESCRIPTION_COL)),
+                        cursor.getString(cursor.getColumnIndex(Column.DOWNLOAD_LINK_COL)),
+                        cursor.getString(cursor.getColumnIndex(Column.ICON_URL_COL)),
+                        cursor.getDouble(cursor.getColumnIndex(Column.REWARD_COL)),
+                        cursor.getString(cursor.getColumnIndex(Column.APPLE_DOWNLOAD_LINK_COL)),
+                        cursor.getString(cursor.getColumnIndex(Column.BUNDLE_ID_COL)));
+
+            } while (cursor.moveToNext());
+        }
+
+        return model;
     }
 }
