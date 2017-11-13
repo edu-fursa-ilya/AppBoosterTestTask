@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">AppBoosterTestTask</string>
     <string name="another_info_label">Another information</string>
-    <string name="reard_title">Награда за выполнение</string>
+    <string name="reward_title">Награда за выполнение</string>
     <string name="description">Описание задачи:</string>
+    <string name="open_title">Открыть</string>
+    <string name="setup_title">Установить</string>
+    <string name="link_title">Ссылка:</string>
+    <string name="points_title">очков</string>
 </resources>

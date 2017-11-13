@@ -35,7 +35,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     private TextView title;
     private TextView description;
     private TextView reward;
-    private TextView downloadLink;
+    private TextView bundleId;
     private ImageView icon;
     private Button btnApp;
     private TaskModel model;
@@ -55,17 +55,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                getActivity().getSupportFragmentManager().popBackStack();
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,7 +62,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         title = (TextView) view.findViewById(R.id.title);
         description = (TextView) view.findViewById(R.id.description);
         reward = (TextView) view.findViewById(R.id.reward);
-        downloadLink = (TextView) view.findViewById(R.id.download_link);
+        bundleId = (TextView) view.findViewById(R.id.bundle_id);
         icon = (ImageView) view.findViewById(R.id.icon);
         btnApp = (Button) view.findViewById(R.id.btnApp);
 
@@ -82,8 +71,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         model = (TaskModel) getArguments().getSerializable(TASK_TAG);
         title.setText(model.getTitle());
         description.setText(model.getDescription());
-        reward.setText(reward.getText() + " " + String.valueOf(model.getReward()));
-        downloadLink.setText(model.getDownloadLink());
+        reward.setText(reward.getText() + " " + String.valueOf(model.getReward() + " " + getResources().getString(R.string.points_title)));
+        bundleId.setText(getPackageInfo(model.getDownloadLink()));
         Picasso.with(MyApp.getContext()).load(model.getIconUrl()).into(icon);
         return view;
     }
@@ -93,10 +82,10 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         boolean isAppInstalled = isAppInstalled(model.getDownloadLink());
         if(isAppInstalled == true) {
-            btnApp.setText("Открыть");
+            btnApp.setText(R.string.open_title);
             btnApp.setBackgroundColor(getResources().getColor(R.color.btn_open_color));
         } else {
-            btnApp.setText("Установить");
+            btnApp.setText(R.string.setup_title);
             btnApp.setBackgroundColor(getResources().getColor(R.color.btn_install_color));
 
         }

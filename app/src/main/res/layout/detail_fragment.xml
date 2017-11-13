@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="5dp">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="507dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="2dp">
+        android:layout_width="393dp"
+        android:layout_height="513dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.086"
+        tools:layout_editor_absoluteX="4dp">
 
         <ImageView
             android:id="@+id/icon"
@@ -19,9 +23,9 @@
             android:layout_height="65dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/title"
-            android:layout_marginLeft="11dp"
-            android:layout_marginStart="11dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             app:srcCompat="@mipmap/ic_launcher"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="16dp" />
@@ -37,35 +41,9 @@
             android:layout_toEndOf="@+id/icon"
             android:layout_toRightOf="@+id/icon"
             android:text="TextView"
-            android:textSize="36sp"
+            android:textSize="30sp"
             tools:layout_editor_absoluteX="104dp"
             tools:layout_editor_absoluteY="16dp" />
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/btnApp"
-            android:layout_alignStart="@+id/btnApp"
-            android:layout_alignTop="@+id/btnApp"
-            android:layout_marginTop="55dp"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="104dp"
-            tools:layout_editor_absoluteY="41dp" />
-
-        <TextView
-            android:id="@+id/download_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/btnApp"
-            android:layout_alignStart="@+id/btnApp"
-            android:layout_below="@+id/reward"
-            android:layout_marginTop="11dp"
-            android:clickable="true"
-            android:text="TextView"
-            android:textSize="12sp"
-            tools:layout_editor_absoluteX="104dp"
-            tools:layout_editor_absoluteY="60dp" />
 
         <TextView
             android:id="@+id/reward"
@@ -74,8 +52,8 @@
             android:layout_alignLeft="@+id/title"
             android:layout_alignStart="@+id/title"
             android:layout_below="@+id/title"
-            android:text="@string/reard_title"
-            android:textSize="18sp"
+            android:text="@string/reward_title"
+            android:textSize="14sp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="124dp" />
@@ -86,12 +64,37 @@
             android:layout_height="44dp"
             android:layout_alignLeft="@+id/icon"
             android:layout_alignStart="@+id/icon"
-            android:layout_below="@+id/download_link"
-            android:layout_marginTop="14dp"
+            android:layout_below="@+id/reward"
+            android:layout_marginTop="48dp"
             android:background="@color/button_color"
             android:text="Button"
             android:textColor="@color/white"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="202dp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/btnApp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignStart="@+id/btnApp"
+            android:layout_below="@+id/btnApp"
+            android:layout_marginTop="35dp"
+            android:text="TextView"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:typeface="normal" />
+
+        <TextView
+            android:id="@+id/bundle_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/reward"
+            android:layout_alignStart="@+id/reward"
+            android:layout_below="@+id/reward"
+            android:text="TextView" />
     </RelativeLayout>
+
 </android.support.constraint.ConstraintLayout>

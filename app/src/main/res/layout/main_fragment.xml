@@ -12,8 +12,8 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="480dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
@@ -38,11 +38,11 @@
             tools:ignore="MissingConstraints">
 
                 <ProgressBar
-                    android:gravity="center_horizontal"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
+                    android:gravity="center_horizontal" />
 
         </RelativeLayout>
 

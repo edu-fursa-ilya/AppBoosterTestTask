@@ -5,11 +5,11 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fursa.appbooster.R;
-import com.fursa.appbooster.app.FragmentHelper;
 import com.fursa.appbooster.app.MyApp;
 import com.fursa.appbooster.db.DBWorker;
 import com.fursa.appbooster.model.TaskModel;
@@ -25,19 +25,19 @@ public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClic
     private static final String TASK_TAG = "TaskObject";
     private static final String TAG = MyViewHolder.class.getSimpleName();
 
-    CardView mCard;
+    RelativeLayout taskItem;
     TextView mTitleText;
     TextView mRewardText;
     ImageView icon;
 
     public MyViewHolder(View itemView) {
         super(itemView);
-        mCard = (CardView) itemView.findViewById(R.id.cardTask);
+        taskItem = (RelativeLayout) itemView.findViewById(R.id.task_item);
         mTitleText = (TextView) itemView.findViewById(R.id.title);
         mRewardText = (TextView) itemView.findViewById(R.id.reward);
         icon = (ImageView) itemView.findViewById(R.id.icon);
 
-        mCard.setOnClickListener(this);
+        taskItem.setOnClickListener(this);
     }
     /*
         OnClick recycler view item
