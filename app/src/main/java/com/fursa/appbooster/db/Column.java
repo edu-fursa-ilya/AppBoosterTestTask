@@ -1,6 +1,7 @@
 package com.fursa.appbooster.db;
 
 /**
+ * This class contains app for DB
  * Created by Fursa Ilya on 10.11.17.
  */
 

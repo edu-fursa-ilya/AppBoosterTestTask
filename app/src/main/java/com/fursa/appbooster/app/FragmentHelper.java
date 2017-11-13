@@ -11,9 +11,6 @@ import com.fursa.appbooster.ui.DetailFragment;
 
 public class FragmentHelper {
 
-    public FragmentHelper() {
-    }
-
     public interface IFragmentCallBack {
          void onShowDetailFragmentListener(Bundle bundle);
     }

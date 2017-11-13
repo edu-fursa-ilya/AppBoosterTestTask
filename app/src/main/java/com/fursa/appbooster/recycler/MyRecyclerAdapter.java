@@ -19,7 +19,6 @@ import java.util.List;
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private List<TaskModel> taskModelList;
 
-
     public MyRecyclerAdapter(List<TaskModel> taskModelList) {
         this.taskModelList = taskModelList;
     }

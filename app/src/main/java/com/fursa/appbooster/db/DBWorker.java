@@ -8,6 +8,9 @@ import android.util.Log;
 
 import com.fursa.appbooster.model.TaskModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This class helps to perform operations
  * with SQLite Database
@@ -21,12 +24,16 @@ public class DBWorker {
     private Cursor cursor;
     private long result;
     private TaskModel model;
+    private List<TaskModel> models;
 
     public DBWorker(Context context) {
         helper = new DBHelper(context);
         db = helper.getWritableDatabase();
     }
 
+    /*
+        Add new task to SQLite database
+     */
     public void add(TaskModel taskModel) {
         ContentValues cv = new ContentValues();
         cv.put(Column.ID_COL, taskModel.getId());
@@ -41,11 +48,17 @@ public class DBWorker {
         Log.d(TAG, String.valueOf(result));
     }
 
+    /*
+        get size of table, rows counter
+     */
     public int getTableSize() {
         cursor = db.query(Column.DB_TABLE, null, null, null, null, null, null);
         return cursor.getCount();
     }
 
+    /*
+        find task in table by title
+     */
     public TaskModel getTaskByTitle(String title) {
 
         cursor = db.rawQuery("SELECT * FROM " + Column.DB_TABLE + " WHERE " + Column.TITLE_COL + "='" + title + "';", null);
@@ -66,5 +79,30 @@ public class DBWorker {
         }
 
         return model;
+    }
+
+    /*
+        get all task from SQLite database
+     */
+    public List<TaskModel> getAllTasks() {
+        cursor = db.rawQuery("SELECT * FROM " + Column.DB_TABLE + ";", null);
+        models = new ArrayList<>();
+
+            if(cursor.moveToFirst()) {
+                do {
+                    model = new TaskModel(
+                            cursor.getInt(cursor.getColumnIndex(Column.ID_COL)),
+                            cursor.getString(cursor.getColumnIndex(Column.TITLE_COL)),
+                            cursor.getString(cursor.getColumnIndex(Column.DESCRIPTION_COL)),
+                            cursor.getString(cursor.getColumnIndex(Column.DOWNLOAD_LINK_COL)),
+                            cursor.getString(cursor.getColumnIndex(Column.ICON_URL_COL)),
+                            cursor.getDouble(cursor.getColumnIndex(Column.REWARD_COL)),
+                            cursor.getString(cursor.getColumnIndex(Column.APPLE_DOWNLOAD_LINK_COL)),
+                            cursor.getString(cursor.getColumnIndex(Column.BUNDLE_ID_COL)));
+                    models.add(model);
+                } while (cursor.moveToNext());
+            }
+
+        return models;
     }
 }

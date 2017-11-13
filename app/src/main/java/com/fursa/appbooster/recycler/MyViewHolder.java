@@ -16,6 +16,7 @@ import com.fursa.appbooster.model.TaskModel;
 import com.fursa.appbooster.ui.MainActivity;
 
 /**
+ * View holder for MyRecyclerView Adapter
  * Created by Fursa Ilya on 10.11.17.
  */
 
@@ -38,7 +39,9 @@ public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClic
 
         mCard.setOnClickListener(this);
     }
-
+    /*
+        OnClick recycler view item
+     */
     @Override
     public void onClick(View view) {
         dbWorker = new DBWorker(MyApp.getContext());

@@ -12,6 +12,7 @@ import com.fursa.appbooster.model.TaskModel;
 import org.w3c.dom.Text;
 
 /**
+ * This class create our SQLite database table
  * Created by Fursa Ilya on 09.11.17.
  */
 
@@ -29,11 +30,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Column.REWARD_COL + " DOUBLE, "
                 + Column.APPLE_DOWNLOAD_LINK_COL + " TEXT, "
                 + Column.BUNDLE_ID_COL + " TEXT " + ");");
+        Log.d(TAG, "onCreate()");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + Column.DB_TABLE);
+        Log.d(TAG, "onUpgrade()");
         onCreate(db);
     }
 

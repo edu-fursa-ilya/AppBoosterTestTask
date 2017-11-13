@@ -50,6 +50,9 @@ public class MainFragment extends Fragment {
         parent = (RelativeLayout) view.findViewById(R.id.progress);
         mRecycler = (RecyclerView) view.findViewById(R.id.recyclerView);
         mRecycler.setLayoutManager(new LinearLayoutManager(MyApp.getContext()));
+
+        dbWorker = new DBWorker(MyApp.getContext());
+
         new FetchOfferItemsTask().execute();
         return view;
     }
@@ -61,7 +64,11 @@ public class MainFragment extends Fragment {
             List<TaskModel> modelList = new ArrayList<>();
             OffersFetcher fetcher = new OffersFetcher();
             try {
-                modelList = fetcher.fetchItems();
+               if(dbWorker.getTableSize() == 0) {
+                   modelList = fetcher.fetchItems();
+               } else {
+                   modelList = dbWorker.getAllTasks();
+               }
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
@@ -73,7 +80,6 @@ public class MainFragment extends Fragment {
 
         @Override
         protected void onPostExecute(List<TaskModel> taskModels) {
-            dbWorker = new DBWorker(MyApp.getContext());
             if (dbWorker.getTableSize() <= 0) {
                 showProgressBar();
                 for (TaskModel model : taskModels) {
@@ -94,6 +100,7 @@ public class MainFragment extends Fragment {
         super.onPause();
         mRecycler.setAdapter(mAdapter);
     }
+
 
     private void hideProgressBar() {
         parent.setVisibility(View.INVISIBLE);

@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements FragmentHelper.IF
                 .commit();
     }
 
-
     @Override
     public void onShowDetailFragmentListener(Bundle bundle) {
         Fragment fragment = DetailFragment.newInstance();

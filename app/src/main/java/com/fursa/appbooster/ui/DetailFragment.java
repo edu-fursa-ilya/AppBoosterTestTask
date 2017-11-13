@@ -1,10 +1,14 @@
 package com.fursa.appbooster.ui;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,8 +36,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     private TextView description;
     private TextView reward;
     private TextView downloadLink;
-    private TextView appBundleId;
-    private TextView appleDownloadLink;
     private ImageView icon;
     private Button btnApp;
     private TaskModel model;
@@ -72,8 +74,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         description = (TextView) view.findViewById(R.id.description);
         reward = (TextView) view.findViewById(R.id.reward);
         downloadLink = (TextView) view.findViewById(R.id.download_link);
-        appBundleId = (TextView) view.findViewById(R.id.app_bundle_id);
-        appleDownloadLink = (TextView) view.findViewById(R.id.apple_download_link);
         icon = (ImageView) view.findViewById(R.id.icon);
         btnApp = (Button) view.findViewById(R.id.btnApp);
 
@@ -82,10 +82,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         model = (TaskModel) getArguments().getSerializable(TASK_TAG);
         title.setText(model.getTitle());
         description.setText(model.getDescription());
-        reward.setText(String.valueOf(model.getReward()));
+        reward.setText(reward.getText() + " " + String.valueOf(model.getReward()));
         downloadLink.setText(model.getDownloadLink());
-        appBundleId.setText(model.getAppleBundleId());
-        appleDownloadLink.setText(model.getAppleDownloadLink());
         Picasso.with(MyApp.getContext()).load(model.getIconUrl()).into(icon);
         return view;
     }
@@ -95,31 +93,51 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         boolean isAppInstalled = isAppInstalled(model.getDownloadLink());
         if(isAppInstalled == true) {
-            btnApp.setBackgroundColor(Color.GREEN);
             btnApp.setText("Открыть");
+            btnApp.setBackgroundColor(getResources().getColor(R.color.btn_open_color));
         } else {
-            btnApp.setBackgroundColor(Color.RED);
             btnApp.setText("Установить");
+            btnApp.setBackgroundColor(getResources().getColor(R.color.btn_install_color));
+
         }
     }
 
-
+    /*
+        if app installed run startActivity with intent to open app
+        if app not installed run Google play store to download it
+     */
     @Override
     public void onClick(View view) {
-
+        if(!isAppInstalled(model.getDownloadLink())) {
+            startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(model.getDownloadLink())));
+        } else {
+            Intent launchIntent = getActivity().getPackageManager().getLaunchIntentForPackage(getPackageInfo(model.getDownloadLink()));
+            if (launchIntent != null) {
+                startActivity(launchIntent);
+            }
+        }
     }
-
+    /*
+        This method returns boolean true if app installed on Android phone
+     */
     private boolean isAppInstalled(String packageName) {
-        String pkg = packageName.substring(packageName.lastIndexOf("com"));
         PackageManager pm = MyApp.getContext().getPackageManager();
         boolean isInstalled = false;
         try {
-            pm.getPackageInfo(pkg, PackageManager.GET_ACTIVITIES);
+            pm.getPackageInfo(getPackageInfo(model.getDownloadLink()), PackageManager.GET_ACTIVITIES);
             isInstalled = true;
         } catch (PackageManager.NameNotFoundException e) {
             isInstalled = false;
         }
+        Log.d(TAG, "isInstalled = " + isInstalled);
         return isInstalled;
+    }
+    /*
+     This method helps to cut our link and get a package of android app
+     */
+    private String getPackageInfo(String downloadLink) {
+        String pkg = downloadLink.substring(downloadLink.lastIndexOf("com"));
+        return pkg;
     }
 
 

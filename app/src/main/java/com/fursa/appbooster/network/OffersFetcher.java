@@ -38,7 +38,9 @@ public class OffersFetcher {
         Response response = client.newCall(request).execute();
         return response.body().string();
     }
-
+    /*
+        This method will call parseItems method and load our items to List
+     */
     public List<TaskModel> fetchItems() throws IOException, JSONException {
         List<TaskModel> modelList = new ArrayList<>();
         String url = Uri.parse("https://goo.gl/SVPYvu").buildUpon().build().toString();
@@ -46,7 +48,9 @@ public class OffersFetcher {
         parseItems(modelList, jsonObject);
         return modelList;
     }
+    /*
 
+     */
     private void parseItems(List<TaskModel> modelList, JSONObject jsonObject) throws JSONException {
         JSONArray offersJsonObject = jsonObject.getJSONArray("offers");
         for (int i = 0; i < offersJsonObject.length(); i++) {

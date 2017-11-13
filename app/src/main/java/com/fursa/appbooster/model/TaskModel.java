@@ -3,6 +3,7 @@ package com.fursa.appbooster.model;
 import java.io.Serializable;
 
 /**
+ * Model class which contains fields to parse from JSON
  * Created by Fursa Ilya on 09.11.17.
  */
 
